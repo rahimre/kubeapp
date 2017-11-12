@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubeapp
+  labels:
+    app: kubeapp
+spec:
+  type: NodePort
+  ports:
+    - port: 9081
+      nodePort: 30001
+      protocol: TCP
+      targetPort: 9081
+  selector:
+    app: springboot
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kubeapp
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: kubeapp
+    spec:
+      containers:
+      - name: kubeapp
+        imagePullPolicy: Always
+        image: dckreg:5000/kubeapp:1.1
+        ports:
+        - containerPort: 9081
