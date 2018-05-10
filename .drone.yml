@@ -1,0 +1,5 @@
+pipeline:
+  build:
+    image: java:openjdk-8-alpine
+    commands:
+      - ./mvnw clean install
