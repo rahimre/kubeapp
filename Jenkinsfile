@@ -33,12 +33,6 @@ podTemplate(label: 'kubeapp', containers: [
                 }
             }
 
-            container('kubectl') {
-                stage('Deploy New Build To Kubernetes') {
-                    sh ("kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_HUB_ACCOUNT}/${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}")
-                }
-            }
-
         }        
     }
 }
