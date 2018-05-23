@@ -11,10 +11,16 @@ podTemplate(label: 'kubeapp', containers: [
         def DOCKER_HUB_ACCOUNT = 'dckreg:5000'
         def DOCKER_IMAGE_NAME = 'kubeapp'
         def K8S_DEPLOYMENT_NAME = 'kubeapp'
-        def BUILD_NUMBER = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+        def BUILD_NUMBER
 
         stage('Clone kubeapp Repository') {
             checkout scm
+            
+            container('git') {
+                stage('get latest commit') {
+                    BUILD_NUMBER = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+                }
+            }
  
             container('maven') {
                 stage('Maven Build') {
