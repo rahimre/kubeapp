@@ -1,8 +1,6 @@
 #!groovy​
 podTemplate(label: 'kubeapp', containers: [
     containerTemplate(name: 'maven', image: 'maven', ttyEnabled: true, command: 'cat'),
-    containerTemplate(name: 'kubectl', image: 'kubectl', ttyEnabled: true, command: 'cat',
-        volumes: [secretVolume(secretName: 'kube-config', mountPath: '/home/cloudslip/.kube')]),
     containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat',
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]),
         
