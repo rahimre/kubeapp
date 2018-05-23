@@ -1,6 +1,7 @@
 #!groovy​
 podTemplate(label: 'kubeapp', containers: [
     containerTemplate(name: 'maven', image: 'maven', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'git', image: 'git', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat',
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]),
         
